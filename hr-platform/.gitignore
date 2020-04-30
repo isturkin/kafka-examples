@@ -1,0 +1,9 @@
+#Intelij files
+.idea
+*.iml
+
+#Obj files
+target
+
+#Gradle
+.gradle
