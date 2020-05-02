@@ -14,18 +14,19 @@ import java.util.Random;
 import java.util.UUID;
 
 import static com.google.common.io.Resources.getResource;
+import static com.visseri.examples.kafka.constants.KafkaConstants.TOPIC_NAME;
 
 @Slf4j
 public class HRInformer {
 
-    private static final String TOPIC_NAME = "applications";
-
     public static void main(String[] args) throws Exception {
+        log.info("Starting Kafka producer...");
+
         Properties producerProperties = new Properties();
         try(InputStream is = getResource("producer.properties").openStream()) {
                 producerProperties.load(is);
         } catch (Exception exception) {
-            log.error("Error was occurred during loading producer settings", exception);
+            log.error("Error occurred during loading producer settings", exception);
         }
 
         Faker faker = new Faker();
@@ -40,6 +41,7 @@ public class HRInformer {
             kafkaProducer.send(new ProducerRecord<>(TOPIC_NAME, application.getUid(),
                             gson.toJson(application)), new MessageCallback(application));
         }
+        log.info("Stopping Kafka producer...");
     }
 
 }
