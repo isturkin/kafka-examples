@@ -7,6 +7,7 @@ public class Application {
 
     private String uid;
     private String fullName;
+    private String position;
     private Double expectedSalary;
 
 }

@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.Properties;
 
 import static com.google.common.io.Resources.getResource;
-import static com.visseri.examples.kafka.constants.KafkaConstants.TOPIC_NAME;
+import static com.visseri.examples.kafka.constants.KafkaConstants.APPLICATIONS_TOPIC_NAME;
 import static java.util.Collections.singletonList;
 
 @Slf4j
@@ -25,7 +25,7 @@ public class HRStatisticsPrinter {
             log.error("Error occurred during loading consumer properties", exception);
         }
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<>(consumerProperties);
-        kafkaConsumer.subscribe(singletonList(TOPIC_NAME));
+        kafkaConsumer.subscribe(singletonList(APPLICATIONS_TOPIC_NAME));
 
         while (true) {
             ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100));
