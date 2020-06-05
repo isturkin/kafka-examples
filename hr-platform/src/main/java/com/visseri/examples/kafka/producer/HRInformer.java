@@ -35,7 +35,7 @@ public class HRInformer {
         Gson gson = new Gson();
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(producerProperties);
         Random random = new Random();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Thread.sleep(1000L);
             Application application = new Application();
             application.setUid(UUID.randomUUID().toString());

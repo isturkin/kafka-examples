@@ -1,10 +1,12 @@
 package com.visseri.examples.kafka.streams.processor;
 
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.visseri.examples.kafka.model.Application;
 import org.apache.kafka.streams.kstream.Predicate;
 
-public class PositionFilter implements Predicate<String, JsonNode> {
+import static java.util.Objects.nonNull;
+
+public class PositionFilter implements Predicate<String, Application> {
 
     private final String position;
 
@@ -13,10 +15,9 @@ public class PositionFilter implements Predicate<String, JsonNode> {
     }
 
     @Override
-    public boolean test(String key, JsonNode value) {
-        JsonNode actual = value.path("position");
-        if (!actual.isMissingNode()) {
-            return position.equals(actual.textValue());
+    public boolean test(String key, Application application) {
+        if (nonNull(application)) {
+            return position.equals(application.getPosition());
         }
         return false;
     }
